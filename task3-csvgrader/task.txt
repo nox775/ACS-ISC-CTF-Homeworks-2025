@@ -1,0 +1,14 @@
+# CSV Grader
+
+Finally, we managed to steal our Cyber-Security teacher's proprietary grading
+program.
+
+It is said he hosts it on a public-facing server:
+isc2025.root.sx:12036
+
+See if you can exploit it and fetch "the flag" to enhance our grades!
+
+Hints:
+  * optional: decompile using Ghidra
+  * ez stack overflow + ROP!
+  * if you manage to retrieve fake flag, try it on remote host!
