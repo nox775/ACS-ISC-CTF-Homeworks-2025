@@ -1,0 +1,18 @@
+# RSA from Temu
+
+Hello, I have found a plasticized piece of paper flying on the street near the
+French street... It has some numbers written on it, but I cannot make much
+of these.
+
+It looks like a RSA-encrypted message, but we only have the public key and a
+weird "dp"...
+
+Unfortunately, it appears that the last part of the paper is missing... 
+
+Oh, there was something else handwritten in a corner:
+"CROISSANT" (huh??) ... ends with "BAGUETTE"!
+
+Hints:
+  * IACR 2004/147!
+  * to verify decryption's success, the flag must contain "that" french word ;)
+    the other one is also important!
