@@ -1,0 +1,24 @@
+# IoT pub/sub service
+
+Dear SuppaHacker,
+
+We've just started coding our own micro IoT platform using the publish/subscribe paradigm.
+
+I'm sending you the binary + some sample code.
+
+When you finally decied to test our production server, here's the address:
+isc2025.root.sx:10015
+
+Looking for an expert's opinion, so please tell us if you find anything out of place.
+
+Regards,
+Unbreakable Protocols Ltd.
+
+
+Hints:
+  * you received all attachments, right?
+  * you must use some automation scripts on this (try `pwntools`!);
+  * as you will see, this task is actually DEAD SERIOUS and shall not be taken lightly!
+  * find function pointer to overflow (hint: DATA)!
+  * more problems arise: ROP chain must reside on stack... but how to chain them together...? 
+  * if you manage to retrieve fake flag, try it on remote host!
