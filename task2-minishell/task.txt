@@ -1,0 +1,24 @@
+# Minishell
+
+Welcome to CyberBalance Financial Group! As a newly hired accountant, your
+first job will be to manage our financial documents.
+
+For this, we have built an internal Document Management Shell (DMS) to handle
+document storage, processing, and compliance reporting in a centralized fashion.
+
+You've been granted access to a restricted mini-shell on our document server,
+please find your public / private key pair attached.
+
+Also note that any tentative unauthorized access will be logged!
+Not that we consider our service to be insecure... in fact, it has been
+thoroughly audited by experts!
+
+Now... let's get to work!
+
+Hints:
+  * traverse your way to the real shell!
+  * check shell history for paths?
+  * shebang troubles you? try to fool him to give you an interactive shell...
+  * find the flag ;)
+  * ?? => elevate your privileges even further (suid audit)!
+
